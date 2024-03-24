@@ -7,6 +7,9 @@ export default class Car {
         this.height = height;
         this.width = width;
 
+        this.speed = 0;
+        this.acceleration = 0.2;
+
         this.controls = new Controls();
     }
 
@@ -22,7 +25,13 @@ export default class Car {
     }
 
     update() {
-        if (this.controls.forward) this.y -= 2;
-        if (this.controls.reverse) this.y += 2
+        if (this.controls.forward) {
+            this.speed += this.acceleration;
+        }
+        if (this.controls.reverse) {
+            this.speed -= this.acceleration;
+        }
+
+        this.y -= this.speed;
     }
 }
