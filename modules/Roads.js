@@ -32,7 +32,7 @@ export default class Road {
         ctx.lineWidth = 4;
         ctx.strokeStyle = "white";
 
-        for (let i = 0; i <= this.laneCount; i++) {
+        for (let i = 1; i <= this.laneCount - 1; i++) {
             const x = lerp(this.left, this.right, i / this.laneCount);
 
             // Draw Lane Dashes
@@ -49,6 +49,7 @@ export default class Road {
             ctx.beginPath();
             ctx.moveTo(border[0].x, border[0].y);
             ctx.lineTo(border[1].x, border[1].y);
+            ctx.stroke();
         })
     }
 }

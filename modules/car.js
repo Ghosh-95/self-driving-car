@@ -16,23 +16,11 @@ export default class Car {
         this.controls = new Controls();
     }
 
-    draw(ctx) {
-        ctx.save();
-        ctx.translate(this.x, this.y);
-        ctx.rotate(-this.angle);
-
-        ctx.beginPath();
-        ctx.rect(
-            - this.width / 2,
-            - this.height / 2,
-            this.width,
-            this.height,
-        );
-        ctx.fill();
-        ctx.restore();
+    update() {
+        this.#move();
     }
 
-    update() {
+    #move() {
         if (this.controls.forward) {
             this.speed += this.acceleration;
         }
@@ -56,7 +44,22 @@ export default class Car {
 
         this.x -= Math.sin(this.angle) * this.speed;
         this.y -= Math.cos(this.angle) * this.speed;
-
-
     }
+
+    draw(ctx) {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(-this.angle);
+
+        ctx.beginPath();
+        ctx.rect(
+            - this.width / 2,
+            - this.height / 2,
+            this.width,
+            this.height,
+        );
+        ctx.fill();
+        ctx.restore();
+    }
+
 }
