@@ -7,11 +7,39 @@ export default class Sensors {
         this.rayLength = 120;
 
         this.rays = [];
+        this.readings = [];
     }
 
-    update() {
+    update(roadBorders) {
         this.#castRays();
+
+        this.readings = [];
+        for (let i = 0; i < this.rays.length; i++) {
+            this.readings.push(
+                this.#getReadings(this.rays[i], roadBorders)
+            );
+        };
     }
+
+    #getReadings(ray, roadBorders) {
+        let touches = [];
+
+        for (let i = 0; i < roadBorders.length; i++) {
+            let touch = getInterSection(
+                ray[0],
+                ray[1],
+                roadBorders[i][0],
+                roadBorders[i][1]
+            );
+
+            if (touch) touches.push(touch);
+        }
+
+        function getInterSection() {
+
+        }
+    }
+
 
     #castRays() {
         this.rays = [];
